@@ -31,10 +31,11 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
   display:flex;align-items:center;padding:0 1rem;gap:.5rem;
   box-shadow:0 4px 28px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.9);
   transition:opacity .3s,box-shadow .3s;
-  width:min(800px,calc(100vw - 1.4rem));
+  width:min(1140px,calc(100vw - 1.4rem));
 }
 #site-header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.95);}
 .hdr-logo{font-family:'Sora',sans-serif;font-weight:800;cursor:pointer;flex-shrink:0;text-decoration:none;font-size:1.08rem;color:#050D14;letter-spacing:-.04em;}
+.hdr-logo .aiv{color:#1a6fff;}.hdr-logo .acc{color:#F04D5C;}
 .hdr-logo .acc{color:#F04D5C;}
 #hdr-nav-wrap{display:flex;align-items:center;gap:.06rem;flex:1;justify-content:center;overflow:hidden;}
 .nav-btn{padding:.26rem .68rem;border:none;background:transparent;color:#374151;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:.2s;border-radius:var(--rp);white-space:nowrap;}
@@ -158,20 +159,52 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
 .wldesc{font-size:.66rem;color:var(--txt3);margin-top:.09rem;line-height:1.55;max-height:0;overflow:hidden;transition:max-height .3s ease;}
 .wli.active .wldesc{max-height:80px;}
 
-/* ─── CERTS ─── */
-.certg{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:.95rem;margin-top:1.5rem;}
-.certc{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;border:1px solid var(--gb);}
-.certimgw{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.8rem;background:linear-gradient(135deg,rgba(0,229,204,.1),rgba(0,229,204,.02));transition:transform .4s;}
-.certc:hover .certimgw{transform:scale(1.05);}
-.certb{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,13,20,.95),transparent);padding:.65rem .8rem .5rem;}
-.certn{font-family:'Sora',sans-serif;font-size:.8rem;font-weight:700;color:#fff;margin-bottom:.05rem;}
-.certi{font-size:.58rem;color:var(--teal);font-weight:600;}
-.certo{position:absolute;inset:0;background:rgba(5,13,20,.92);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1rem;opacity:0;transition:opacity .3s;text-align:center;}
-.certc:hover .certo{opacity:1;}
-.con{font-family:'Sora',sans-serif;font-size:.86rem;font-weight:800;color:#fff;margin-bottom:.2rem;}
-.coi{font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:.35rem;}
-.cod{font-size:.56rem;color:var(--txt3);margin-bottom:.4rem;}
-.codc{font-size:.68rem;color:var(--txt2);line-height:1.6;}
+/* ─── CERTS MARQUEE ─── */
+.cert-marquee-wrap{overflow:hidden;width:100%;margin-top:1.5rem;position:relative;}
+.cert-marquee-wrap::before,.cert-marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.cert-marquee-wrap::before{left:0;background:linear-gradient(90deg,rgba(9,21,32,1),transparent);}
+.cert-marquee-wrap::after{right:0;background:linear-gradient(270deg,rgba(9,21,32,1),transparent);}
+.cert-marquee{display:flex;gap:1rem;width:max-content;animation:certScroll 28s linear infinite;}
+.cert-marquee:hover{animation-play-state:paused;}
+@keyframes certScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.certm{flex-shrink:0;width:210px;position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;border:1px solid var(--gb);cursor:pointer;}
+.certm .certimgw{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.8rem;background:linear-gradient(135deg,rgba(0,229,204,.1),rgba(0,229,204,.02));transition:transform .4s;}
+.certm:hover .certimgw{transform:scale(1.06);}
+.certm .certb{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,13,20,.95),transparent);padding:.65rem .8rem .5rem;}
+.certm .certn{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.05rem;}
+.certm .certi{font-size:.56rem;color:var(--teal);font-weight:600;}
+.certm .certo{position:absolute;inset:0;background:rgba(5,13,20,.92);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.1rem;opacity:0;transition:opacity .3s;text-align:center;}
+.certm:hover .certo{opacity:1;}
+
+/* ─── STATUS PROGRESS ─── */
+.stat-prog-wrap{margin-top:.55rem;}
+.stat-prog-label{display:flex;justify-content:space-between;margin-bottom:.22rem;}
+.stat-prog-name{font-size:.54rem;color:var(--txt3);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+.stat-prog-val{font-size:.54rem;font-weight:800;}
+.stat-prog-track{height:4px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;}
+.stat-prog-bar{height:100%;border-radius:99px;width:0;transition:width 1.2s cubic-bezier(.25,.46,.45,.94);}
+
+/* ─── OTHER WEBSITES ─── */
+.oweb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:1.5rem;}
+.oweb-card{position:relative;background:var(--glass);border:1px solid var(--gb);border-radius:var(--rl);padding:1.5rem;cursor:pointer;text-decoration:none;display:block;overflow:hidden;transition:.3s;group:true;}
+.oweb-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,204,.04),transparent);opacity:0;transition:.3s;}
+.oweb-card:hover{border-color:rgba(0,229,204,.35);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 0 1px rgba(0,229,204,.12);}
+.oweb-card:hover::before{opacity:1;}
+.oweb-card-icon{font-size:2rem;margin-bottom:.75rem;}
+.oweb-card-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.25rem;letter-spacing:-.02em;}
+.oweb-card-tag{font-size:.56rem;font-weight:800;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem;}
+.oweb-card-desc{font-size:.76rem;color:var(--txt3);line-height:1.65;}
+.oweb-card-arrow{position:absolute;top:1.1rem;right:1.1rem;width:28px;height:28px;border-radius:50%;background:rgba(0,229,204,.08);border:1px solid rgba(0,229,204,.18);display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--teal);transition:.3s;}
+.oweb-card:hover .oweb-card-arrow{background:var(--teal);color:var(--dk);transform:translate(2px,-2px);}
+.oweb-card-stripe{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:.3s;}
+.oweb-card:hover .oweb-card-stripe{opacity:1;}
+
+/* ─── MONGO STATUS ─── */
+.mongo-status{display:inline-flex;align-items:center;gap:.3rem;font-size:.58rem;font-weight:800;padding:.14rem .44rem;border-radius:99px;letter-spacing:.06em;}
+.mongo-status.ok{background:rgba(16,185,129,.12);color:#10B981;border:1px solid rgba(16,185,129,.22);}
+.mongo-status.err{background:rgba(240,77,92,.12);color:var(--coral);border:1px solid rgba(240,77,92,.22);}
+.mongo-status.sync{background:rgba(0,229,204,.12);color:var(--teal);border:1px solid rgba(0,229,204,.22);}
+
 
 /* ─── STATUS ─── */
 .statg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;margin-top:1.5rem;}
@@ -357,7 +390,7 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
 <div id="scroll-progress"></div>
 
 <header id="site-header">
-  <a class="hdr-logo" href="#" onclick="goHome();return false;">AIV<span class="acc">1</span></a>
+  <a class="hdr-logo" href="#" onclick="goHome();return false;"><span class="aiv">AIV</span><span class="acc">1</span></a>
   <div id="hdr-nav-wrap"></div>
   <div class="hdr-right">
     <div class="hdr-stats" id="hdr-stats"></div>
@@ -467,8 +500,10 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
   <section class="section" id="certificates-section" style="display:none;">
     <div class="sec-inner"><div class="gc">
       <div class="slbl">// Achievements</div><h2 class="stitle">Certifications</h2>
-      <p class="ssub">Hover each certificate to view details.</p>
-      <div class="certg" id="cert-grid"></div>
+      <p class="ssub">Hover to pause · hover each certificate to view details.</p>
+      <div class="cert-marquee-wrap">
+        <div class="cert-marquee" id="cert-marquee"></div>
+      </div>
     </div></div>
   </section>
   <section class="section" id="mystatus-section" style="display:none;">
@@ -477,13 +512,20 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
       <div class="statg" id="status-grid"></div>
     </div></div>
   </section>
+  <section class="section" id="otherwebs-section" style="display:none;">
+    <div class="sec-inner"><div class="gc">
+      <div class="slbl">// Digital Ecosystem</div><h2 class="stitle">My Other Websites</h2>
+      <p class="ssub">Click any card to visit the site.</p>
+      <div class="oweb-grid" id="oweb-grid"></div>
+    </div></div>
+  </section>
   <section class="section" id="contact" style="display:none;">
     <div class="sec-inner"><div class="gc">
       <div class="slbl">// Establish Link</div><h2 class="stitle">Get In Touch</h2>
-      <div style="max-width:490px;margin-top:1.3rem;">
-        <div class="fg"><label class="fl">Your Name</label><input class="fi" id="cn" placeholder="Your name"></div>
-        <div class="fg"><label class="fl">Email</label><input class="fi" id="ce" placeholder="you@email.com"></div>
-        <div class="fg"><label class="fl">Message</label><textarea class="fi" id="cm" rows="4" placeholder="Your message..."></textarea></div>
+      <div style="width:100%;max-width:640px;margin-top:1.3rem;">
+        <div class="fg"><label class="fl">Your Name</label><input class="fi" id="cn" placeholder="Your name" style="width:100%;"></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" id="ce" placeholder="you@email.com" style="width:100%;"></div>
+        <div class="fg"><label class="fl">Message</label><textarea class="fi" id="cm" rows="4" placeholder="Your message..." style="width:100%;"></textarea></div>
         <button class="btn btl" onclick="sendForm()">Send Message →</button>
         <div id="cs" style="margin-top:.6rem;font-size:.74rem;display:none;font-weight:700;"></div>
       </div>
@@ -495,7 +537,7 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
   <div class="fi2">
     <div class="fgr">
       <div>
-        <div class="flt">AIV<span class="acc">1</span></div>
+        <div class="flt"><span style="color:#1a6fff;">AIV</span><span class="acc">1</span></div>
         <p id="ftag" style="color:var(--txt3);font-size:.76rem;line-height:1.7;max-width:188px;">Autonomous Intelligence Vision One. Built for the Operator.</p>
         <div class="fso" id="fso"></div>
       </div>
@@ -645,6 +687,12 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
       </div>
       <div class="ads" id="admin-certificates"><div class="adst">Certificates</div><div style="margin-bottom:.6rem;"><button class="btn btl sm" onclick="openCertMod()">+ Add</button></div><div id="certl"></div></div>
       <div class="ads" id="admin-mystatus"><div class="adst">My Status</div><div style="margin-bottom:.6rem;"><button class="btn btl sm" onclick="openStatMod()">+ Add</button></div><div id="statl"></div></div>
+      <div class="ads" id="admin-otherwebs">
+        <div class="adst">My Other Websites</div>
+        <p style="font-size:.8rem;color:var(--txt3);margin-bottom:.85rem;">Manage clickable website cards shown on your profile.</p>
+        <div style="margin-bottom:.6rem;"><button class="btn btl sm" onclick="addOWeb()">+ Add Website</button></div>
+        <div id="owebl"></div>
+      </div>
       <div class="ads" id="admin-contact"><div class="adst">Contact</div><div class="adc"><div class="fg"><label class="fl">Your Email</label><input class="fi" id="ces" placeholder="you@domain.com" oninput="S.contactEmail=this.value;save()"></div></div></div>
       <div class="ads" id="admin-footer">
         <div class="adst">Footer</div>
@@ -675,7 +723,7 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
       </div>
       <div class="ads" id="admin-settings">
         <div class="adst">Settings</div>
-        <div class="atabs"><div class="atab active" onclick="swTab('set','key',this)">Admin Key</div><div class="atab" onclick="swTab('set','data',this)">Data</div></div>
+        <div class="atabs"><div class="atab active" onclick="swTab('set','key',this)">Admin Key</div><div class="atab" onclick="swTab('set','data',this)">Data</div><div class="atab" onclick="swTab('set','jsonbin',this)">JSONBin</div></div>
         <div class="atp active" id="set-tab-key"><div class="adc">
           <div class="fg"><label class="fl">New Key</label><input class="fi" type="password" id="nk"></div>
           <div class="fg"><label class="fl">Confirm</label><input class="fi" type="password" id="ck"></div>
@@ -691,6 +739,17 @@ body{background:var(--dk);color:var(--txt);font-family:'DM Sans',sans-serif;over
         </div>
         <div class="adc"><div style="font-size:.6rem;font-weight:800;color:var(--txt3);margin-bottom:.38rem;text-transform:uppercase;letter-spacing:.08em;">AUTO-SAVE</div><div id="ass" style="font-size:.78rem;color:var(--txt2);"></div></div>
         </div>
+        <div class="atp" id="set-tab-jsonbin"><div class="adc">
+          <p style="font-size:.8rem;color:var(--txt3);margin-bottom:.85rem;line-height:1.7;">Connect to <strong style="color:var(--teal);">jsonbin.io</strong> for cloud sync. Create a free account at <a href="https://jsonbin.io" target="_blank" style="color:var(--teal);">jsonbin.io</a>, create a bin, then paste your credentials below.</p>
+          <div class="fg"><label class="fl">Bin ID</label><input class="fi" type="text" id="jb-binid" placeholder="e.g. 64f3a1b2ad1234567890abcd" autocomplete="off"></div>
+          <div class="fg"><label class="fl">Master API Key</label><input class="fi" type="password" id="jb-apikey" placeholder="$2a$10$..." autocomplete="off"></div>
+          <div style="display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.6rem;">
+            <button class="btn btl sm" onclick="saveJBCreds()">&#x1F4BE; Save &amp; Connect</button>
+            <button class="btn sm" style="border-color:var(--gb2);color:var(--txt2);" onclick="testJB()">&#x26A1; Test</button>
+            <button class="btn sm rd" onclick="clearJBCreds()">&#x2715; Disconnect</button>
+          </div>
+          <div id="jb-status" style="margin-top:.65rem;font-size:.74rem;font-weight:700;min-height:1.2em;"></div>
+        </div></div>
       </div>
     </main>
   </div>
@@ -776,7 +835,8 @@ const S={
   tools:[{id:'te1',name:'Word',pct:96,color:'#185ABD'},{id:'te2',name:'Excel',pct:92,color:'#1E7145'},{id:'te3',name:'PowerPoint',pct:88,color:'#B7472A'},{id:'te4',name:'Outlook',pct:90,color:'#0072C6'},{id:'te5',name:'Teams',pct:85,color:'#464EB8'},{id:'te6',name:'Access',pct:75,color:'#A4373A'}],
   works:[{id:'w1',name:'IT Support & Helpdesk',pct:30,color:'#00E5CC',description:'Day-to-day technical support, ticket resolution, user assistance, and hardware/software troubleshooting.'},{id:'w2',name:'Network Administration',pct:20,color:'#F59E0B',description:'Setup, monitoring, and maintenance of LAN/WAN infrastructure, routers, switches, and access points.'},{id:'w3',name:'System Maintenance',pct:18,color:'#10B981',description:'Regular OS updates, patch management, antivirus deployment, and endpoint health monitoring.'},{id:'w4',name:'Creating Certificates',pct:12,color:'#A78BFA',description:'Designing and issuing official certificates, awards, and credentials for staff achievements.'},{id:'w5',name:'Data Backup & Recovery',pct:10,color:'#F04D5C',description:'Scheduled backups, disaster recovery planning, and data restoration procedures.'},{id:'w6',name:'Office Upkeep',pct:5,color:'#F97316',description:'Maintaining a clean, organized IT workspace including cable management and equipment hygiene.'},{id:'w7',name:'Others',pct:5,color:'#6B7280',description:'Miscellaneous tasks including vendor coordination, inventory management, and ad-hoc support.'}],
   certs:[{id:'c1',name:'CompTIA A+',issuer:'CompTIA',date:'2020',image:'',description:'Hardware and software troubleshooting certification'},{id:'c2',name:'Microsoft Office Specialist',issuer:'Microsoft',date:'2019',image:'',description:'Expert-level MS Office proficiency'},{id:'c3',name:'CompTIA Network+',issuer:'CompTIA',date:'2021',image:'',description:'Network infrastructure and security foundations'},{id:'c4',name:'ITIL Foundation',issuer:'Axelos',date:'2022',image:'',description:'IT service management best practices'}],
-  stats:[{id:'ms1',icon:'💼',label:'Work Status',value:'Full-time IT Support Specialist',note:'Government Agency'},{id:'ms2',icon:'💍',label:'Civil Status',value:'Single',note:''},{id:'ms3',icon:'❤️',label:'Health Status',value:'Active & Healthy',note:'Last checkup: 2024'},{id:'ms4',icon:'💰',label:'Financial Status',value:'Stable Employment',note:'Regular salary'},{id:'ms5',icon:'📍',label:'Location',value:'Manila, Philippines',note:'Open to relocation'},{id:'ms6',icon:'🎓',label:'Education',value:'BS Information Technology',note:'Graduated 2008'}],
+  stats:[{id:'ms1',icon:'💼',label:'Work Status',value:'Full-time IT Support Specialist',note:'Government Agency',pct:100,pctColor:'#2383E2'},{id:'ms2',icon:'💍',label:'Civil Status',value:'Single',note:'',pct:0,pctColor:''},{id:'ms3',icon:'❤️',label:'Health Status',value:'Active & Healthy',note:'Last checkup: 2024',pct:90,pctColor:'#F04D5C'},{id:'ms4',icon:'💰',label:'Financial Status',value:'Stable Employment',note:'Regular salary',pct:80,pctColor:'#059669'},{id:'ms5',icon:'📍',label:'Location',value:'Manila, Philippines',note:'Open to relocation',pct:0,pctColor:''},{id:'ms6',icon:'🎓',label:'Education',value:'BS Information Technology',note:'Graduated 2008',pct:100,pctColor:'#7C3AED'}],
+  otherwebs:[{id:'ow1',icon:'🤖',title:'AIV ONE',tag:'Cyberpunk · Cybersecurity',desc:'Dark-themed cybersecurity intelligence dashboard — autonomous threat monitoring and neural detection systems.',url:'#',color:'#00E5CC'},{id:'ow2',icon:'🌐',title:'Portfolio v1',tag:'Web · Design',desc:'First iteration portfolio with editorial design and project showcase.',url:'#',color:'#7C3AED'}],
   footerLegal:[{id:'fl1',label:'Privacy Policy',url:'#'},{id:'fl2',label:'Terms',url:'#'}],
   social:[{id:'tw',icon:'𝕏',label:'Twitter',url:'#'},{id:'gh',icon:'⌨',label:'GitHub',url:'#'},{id:'li',icon:'in',label:'LinkedIn',url:'#'}],
 };
@@ -788,6 +848,7 @@ const SECS=[
   {id:'works',label:'My Works',type:'builtin',pid:'works-section',svg:'<circle cx="12" cy="12" r="10"/>'},
   {id:'certificates',label:'Certificates',type:'builtin',pid:'certificates-section',svg:'<rect x="2" y="3" width="20" height="14" rx="2"/>'},
   {id:'mystatus',label:'My Status',type:'builtin',pid:'mystatus-section',svg:'<circle cx="12" cy="8" r="5"/>'},
+  {id:'otherwebs',label:'My Websites',type:'builtin',pid:'otherwebs-section',svg:'<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'},
   {id:'contact',label:'Contact',type:'builtin',pid:'contact',svg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'},
 ];
 const CST={sections:[]};let csid=1;
@@ -796,30 +857,107 @@ function iHid(id){return S.hidden&&S.hidden.includes(id);}
 function togHid(id){if(!S.hidden)S.hidden=[];if(S.hidden.includes(id))S.hidden=S.hidden.filter(x=>x!==id);else S.hidden.push(id);rdrPO();rdrSS();rdrSOP();save();}
 function movSec(id,dir){const i=SECS.findIndex(s=>s.id===id);if(i===-1)return;const t=i+dir;if(t<0||t>=SECS.length)return;[SECS[i],SECS[t]]=[SECS[t],SECS[i]];rdrPO();rdrSS();rdrSOP();rdrNav();rdrFL();save();}
 
-/* ══ DB ══ */
+/* ══ DB + JSONBIN ══ */
+const JBK_BIN='aiv1_jb_binid';const JBK_API='aiv1_jb_apikey';
+const JSONBIN={get binId(){return localStorage.getItem(JBK_BIN)||'';},get apiKey(){return localStorage.getItem(JBK_API)||'';}};
+let mongoOK=false;
+
+async function mongoRead(){
+  if(!JSONBIN.binId)return null;
+  try{
+    const r=await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN.binId}/latest`,{headers:{'X-Master-Key':JSONBIN.apiKey}});
+    if(!r.ok)return null;
+    const d=await r.json();mongoOK=true;updMongoUI('ok');return d.record||null;
+  }catch(e){mongoOK=false;updMongoUI('err');return null;}
+}
+
+async function mongoWrite(data){
+  if(!JSONBIN.binId)return;
+  try{
+    updMongoUI('sync');
+    const r=await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN.apiKey},body:JSON.stringify(data)});
+    if(!r.ok)throw new Error('fail');
+    mongoOK=true;updMongoUI('ok');
+  }catch(e){mongoOK=false;updMongoUI('err');}
+}
+
+function updMongoUI(status){
+  mongoOK=(status==='ok');
+  const el=document.getElementById('mongo-status-el');if(!el)return;
+  const cfg={ok:{cls:'ok',txt:'● JSONBin Connected'},err:{cls:'err',txt:'● JSONBin Offline'},sync:{cls:'sync',txt:'↻ Syncing…'}};
+  const c=cfg[status]||cfg.err;el.className='mongo-status '+c.cls;el.textContent=c.txt;
+}
+
+function saveJBCreds(){
+  const bid=(document.getElementById('jb-binid')||{value:''}).value.trim();
+  const ak=(document.getElementById('jb-apikey')||{value:''}).value.trim();
+  if(!bid||!ak){setJBStatus('Enter both Bin ID and API Key','var(--coral)');return;}
+  localStorage.setItem(JBK_BIN,bid);localStorage.setItem(JBK_API,ak);
+  setJBStatus('Saved! Testing connection…','var(--teal)');
+  testJB();
+}
+
+async function testJB(){
+  const bid=JSONBIN.binId;const ak=JSONBIN.apiKey;
+  if(!bid||!ak){setJBStatus('No credentials saved yet.','var(--coral)');return;}
+  setJBStatus('Testing…','var(--teal)');
+  try{
+    const r=await fetch(`https://api.jsonbin.io/v3/b/${bid}/latest`,{headers:{'X-Master-Key':ak}});
+    if(r.ok){mongoOK=true;updDBS();setJBStatus('✓ Connected successfully!','#10B981');updMongoUI('ok');}
+    else{const d=await r.json().catch(()=>({}));setJBStatus('✕ Error: '+(d.message||r.status),'var(--coral)');mongoOK=false;updMongoUI('err');}
+  }catch(e){setJBStatus('✕ Network error. Check your credentials.','var(--coral)');mongoOK=false;updMongoUI('err');}
+}
+
+function clearJBCreds(){
+  localStorage.removeItem(JBK_BIN);localStorage.removeItem(JBK_API);
+  const bi=document.getElementById('jb-binid');if(bi)bi.value='';
+  const ak=document.getElementById('jb-apikey');if(ak)ak.value='';
+  mongoOK=false;updMongoUI('err');updDBS();
+  setJBStatus('Disconnected.','var(--txt3)');
+}
+
+function setJBStatus(msg,color){const e=document.getElementById('jb-status');if(e){e.textContent=msg;e.style.color=color||'var(--txt2)';}}
+
+function popJBAdmin(){
+  const bi=document.getElementById('jb-binid');if(bi)bi.value=JSONBIN.binId;
+  const ak=document.getElementById('jb-apikey');if(ak&&JSONBIN.apiKey)ak.value=JSONBIN.apiKey;
+}
+
 const DBK='aiv1_q51';let svTmr=null;
-function save(){clearTimeout(svTmr);svTmr=setTimeout(()=>{try{localStorage.setItem(DBK,JSON.stringify(getExp()));const e=document.getElementById('ass');if(e)e.textContent='✓ Saved at '+new Date().toLocaleTimeString();updDBS();}catch(e){}},600);}
-function updDBS(){const e=document.getElementById('dbsd');if(!e)return;try{const r=localStorage.getItem(DBK);const sz=r?Math.round(r.length/1024*10)/10:0;e.innerHTML=`<span style="color:var(--teal);font-weight:800;">✓ Saved</span> · ${sz} KB<br><span style="font-size:.7rem;color:var(--txt3);">Last: ${new Date().toLocaleString()}</span>`;}catch(e){}}
-function getExp(){return{version:'5.1q',exported:new Date().toISOString(),hero:S.h,posts:S.posts,skills:S.skills,tools:S.tools,works:S.works,certs:S.certs,stats:S.stats,social:S.social,footerLegal:S.footerLegal,navVis:S.navVis,contactEmail:S.contactEmail,snd:S.snd,adminKey:S.adminKey,secOrder:SECS.map(s=>s.id),hidden:S.hidden,ftag:document.getElementById('ftag')?.textContent,fcp:document.getElementById('fcp')?.textContent,csecs:CST.sections};}
+function save(){
+  clearTimeout(svTmr);
+  svTmr=setTimeout(()=>{
+    try{
+      const data=getExp();
+      localStorage.setItem(DBK,JSON.stringify(data));
+      const e=document.getElementById('ass');if(e)e.textContent='✓ Saved locally at '+new Date().toLocaleTimeString();
+      updDBS();
+      mongoWrite(data); // sync to cloud
+    }catch(e){}
+  },600);
+}
+function updDBS(){const e=document.getElementById('dbsd');if(!e)return;try{const r=localStorage.getItem(DBK);const sz=r?Math.round(r.length/1024*10)/10:0;const jbCfg=JSONBIN.binId?mongoOK?'ok':'err':'none';const jbTxt=JSONBIN.binId?(mongoOK?'● JSONBin Connected':'● JSONBin Offline'):'● JSONBin Not Configured';e.innerHTML=`<span style="color:var(--teal);font-weight:800;">✓ Saved Locally</span> · ${sz} KB<br><span style="font-size:.7rem;color:var(--txt3);">Last: ${new Date().toLocaleString()}</span><br><div id="mongo-status-el" class="mongo-status ${jbCfg==='none'?'err':jbCfg}" style="margin-top:.4rem;">${jbTxt}</div>`;}catch(e){}}
+function getExp(){return{version:'5.2q',exported:new Date().toISOString(),hero:S.h,posts:S.posts,skills:S.skills,tools:S.tools,works:S.works,certs:S.certs,stats:S.stats,otherwebs:S.otherwebs,social:S.social,footerLegal:S.footerLegal,navVis:S.navVis,contactEmail:S.contactEmail,snd:S.snd,adminKey:S.adminKey,secOrder:SECS.map(s=>s.id),hidden:S.hidden,ftag:document.getElementById('ftag')?.textContent,fcp:document.getElementById('fcp')?.textContent,csecs:CST.sections};}
 function exportData(){const data=JSON.stringify(getExp(),null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='data.json';a.click();URL.revokeObjectURL(url);showToast('Exported data.json ✓','green');playClick('success');}
 function importData(inp){const file=inp.files[0];if(!file)return;const st=document.getElementById('impst');if(st){st.textContent='Reading…';st.style.color='var(--teal)';}const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);loadData(data);localStorage.setItem(DBK,JSON.stringify(data));if(st){st.textContent='✓ Imported!';st.style.color='#10B981';}showToast('Imported ✓','green');playClick('success');rdrAll();}catch(err){if(st){st.textContent='✕ Invalid JSON.';st.style.color='var(--coral)';}showToast('Import failed','red');}};reader.readAsText(file);inp.value='';}
-function loadData(d){if(!d)return;if(d.hero)Object.assign(S.h,d.hero);if(d.posts)S.posts=d.posts;if(d.skills)S.skills=d.skills;if(d.tools)S.tools=d.tools;else if(d.toolsExpertise)S.tools=d.toolsExpertise;else if(d.msOffice)S.tools=d.msOffice;if(d.works)S.works=d.works;if(d.certs)S.certs=d.certs;else if(d.certificates)S.certs=d.certificates;if(d.stats)S.stats=d.stats;else if(d.myStatus)S.stats=d.myStatus;if(d.social)S.social=d.social;else if(d.socialLinks)S.social=d.socialLinks;if(d.footerLegal)S.footerLegal=d.footerLegal;if(d.navVis)S.navVis=d.navVis;else if(d.navVisible)S.navVis=d.navVisible;if(d.contactEmail)S.contactEmail=d.contactEmail;if(d.snd!==undefined)S.snd=d.snd;if(d.adminKey)S.adminKey=d.adminKey;if(d.hidden)S.hidden=d.hidden;else if(d.hiddenSections)S.hidden=d.hiddenSections;if(d.ftag){const e=document.getElementById('ftag');if(e)e.textContent=d.ftag;}if(d.fcp)updFC(d.fcp);
+function loadData(d){if(!d)return;if(d.hero)Object.assign(S.h,d.hero);if(d.posts)S.posts=d.posts;if(d.skills)S.skills=d.skills;if(d.tools)S.tools=d.tools;else if(d.toolsExpertise)S.tools=d.toolsExpertise;else if(d.msOffice)S.tools=d.msOffice;if(d.works)S.works=d.works;if(d.certs)S.certs=d.certs;else if(d.certificates)S.certs=d.certificates;if(d.stats)S.stats=d.stats;else if(d.myStatus)S.stats=d.myStatus;if(d.otherwebs)S.otherwebs=d.otherwebs;if(d.social)S.social=d.social;else if(d.socialLinks)S.social=d.socialLinks;if(d.footerLegal)S.footerLegal=d.footerLegal;if(d.navVis)S.navVis=d.navVis;else if(d.navVisible)S.navVis=d.navVisible;if(d.contactEmail)S.contactEmail=d.contactEmail;if(d.snd!==undefined)S.snd=d.snd;if(d.adminKey)S.adminKey=d.adminKey;if(d.hidden)S.hidden=d.hidden;else if(d.hiddenSections)S.hidden=d.hiddenSections;if(d.ftag){const e=document.getElementById('ftag');if(e)e.textContent=d.ftag;}if(d.fcp)updFC(d.fcp);
   if(d.secOrder&&Array.isArray(d.secOrder)){const no=[];d.secOrder.forEach(id=>{const f=SECS.find(s=>s.id===id);if(f)no.push(f);});SECS.forEach(s=>{if(!no.find(x=>x.id===s.id))no.push(s);});SECS.splice(0,SECS.length,...no);}
   if(d.csecs){d.csecs.forEach(sec=>{if(!CST.sections.find(s=>s.id===sec.id)){CST.sections.push(sec);if(!SECS.find(s=>s.id===sec.id))SECS.push({id:sec.id,label:sec.title,type:'custom',pid:'msec-'+sec.id,svg:'<rect x="3" y="3" width="18" height="18" rx="2"/>',hidden:false});}});}}
 function loadSaved(){try{const r=localStorage.getItem(DBK);if(r)loadData(JSON.parse(r));}catch(e){}}
 async function loadDJ(){try{const r=await fetch('data.json?_='+Date.now());if(!r.ok)return false;loadData(await r.json());return true;}catch(e){return false;}}
-function rdrAll(){updCard();updIntro();rdrPosts();rdrSKBars();rdrTools();rdrWorks();rdrCerts();rdrStats();rdrFSoc();rdrFL();rdrNav();updStats();rdrPO();rdrSS();rdrSOP();}
+function rdrAll(){updCard();updIntro();rdrPosts();rdrSKBars();rdrTools();rdrWorks();rdrCerts();rdrStats();rdrOtherWebs();rdrFSoc();rdrFL();rdrNav();updStats();rdrPO();rdrSS();rdrSOP();}
 
 /* ══ NAV ══ */
 function getAllS(){const r=[{id:'home',label:'Home',action:'home'}];SECS.forEach(s=>{if(iHid(s.id))return;if(s.type==='custom'){const sec=CST.sections.find(x=>x.id===s.id);if(sec)r.push({id:s.id,label:sec.title,action:'msec-'+s.id});}else r.push({id:s.id,label:s.label,action:s.pid});});return r;}
-function rdrNav(){const wrap=document.getElementById('hdr-nav-wrap');const over=document.getElementById('nav-overflow');if(!wrap||!over)return;wrap.innerHTML='';over.innerHTML='';const all=getAllS();const vis=S.navVis||[];const sel=all.filter(s=>vis.includes(s.id)).slice(0,4);const nonVis=all.filter(s=>!vis.includes(s.id));const tmp=[];wrap.style.visibility='hidden';sel.forEach(s=>{const btn=document.createElement('button');btn.className='nav-btn';btn.textContent=s.label;btn.onclick=()=>{playClick('nav');closeHam();goTo(s.action);};wrap.appendChild(btn);tmp.push({btn,s});});requestAnimationFrame(()=>{wrap.style.visibility='';const wW=wrap.offsetWidth;let tot=0;const ovf=[];tmp.forEach(({btn,s})=>{tot+=btn.offsetWidth+4;if(tot>wW){btn.remove();ovf.push(s);}});[...ovf,...nonVis].forEach(s=>{const btn=document.createElement('button');btn.className='omenu-btn';btn.textContent=s.label;btn.onclick=()=>{playClick('nav');closeHam();goTo(s.action);};over.appendChild(btn);});const lb=document.createElement('button');lb.className='omenu-btn';lb.innerHTML='🔐 Admin';lb.onclick=()=>{closeHam();openAdm();};over.appendChild(lb);rdrANL();});}
+function rdrNav(){const wrap=document.getElementById('hdr-nav-wrap');const over=document.getElementById('nav-overflow');if(!wrap||!over)return;wrap.innerHTML='';over.innerHTML='';const all=getAllS();const vis=S.navVis||[];// On wide screens show all visible, overflow only what doesn't fit
+  const sel=all.filter(s=>vis.includes(s.id));const nonVis=all.filter(s=>!vis.includes(s.id));const tmp=[];wrap.style.visibility='hidden';sel.forEach(s=>{const btn=document.createElement('button');btn.className='nav-btn';btn.textContent=s.label;btn.onclick=()=>{playClick('nav');closeHam();goTo(s.action);};wrap.appendChild(btn);tmp.push({btn,s});});requestAnimationFrame(()=>{wrap.style.visibility='';const wW=wrap.offsetWidth;let tot=0;const ovf=[];tmp.forEach(({btn,s})=>{tot+=btn.offsetWidth+4;if(tot>wW){btn.remove();ovf.push(s);}});[...ovf,...nonVis].forEach(s=>{const btn=document.createElement('button');btn.className='omenu-btn';btn.textContent=s.label;btn.onclick=()=>{playClick('nav');closeHam();goTo(s.action);};over.appendChild(btn);});const lb=document.createElement('button');lb.className='omenu-btn';lb.innerHTML='🔐 Admin';lb.onclick=()=>{closeHam();openAdm();};over.appendChild(lb);rdrANL();});}
 if(window.ResizeObserver)new ResizeObserver(()=>rdrNav()).observe(document.getElementById('site-header'));
 addEventListener('resize',rdrNav);
 function toggleHam(){const o=document.getElementById('nav-overflow');if(o){o.classList.toggle('open');if(o.classList.contains('open'))playClick('open');}}
 function closeHam(){document.getElementById('nav-overflow')?.classList.remove('open');}
 document.addEventListener('click',e=>{const over=document.getElementById('nav-overflow');const ham=document.getElementById('ham-btn');if(over&&ham&&!over.contains(e.target)&&e.target!==ham)over.classList.remove('open');const spp=document.getElementById('spp');if(spp&&!spp.contains(e.target)&&!e.target.closest('.sbtn'))spp.classList.remove('open');});
 function rdrANL(){const list=document.getElementById('anl');if(!list)return;list.innerHTML='';const all=getAllS();const vis=S.navVis||[];all.forEach(s=>{const checked=vis.includes(s.id);const row=document.createElement('label');row.style.cssText='display:flex;align-items:center;gap:.48rem;padding:.36rem .46rem;cursor:pointer;border-bottom:1px solid var(--gb);';row.innerHTML=`<input type="checkbox" ${checked?'checked':''} style="cursor:pointer;width:13px;height:13px;" onchange="togNV('${s.id}',this.checked)"><span style="font-size:.8rem;flex:1;font-weight:600;color:var(--txt2);">${s.label}</span><span class="tg">${s.id}</span>`;list.appendChild(row);});}
-function togNV(id,show){if(!S.navVis)S.navVis=[];if(show){if(S.navVis.length>=4){showToast('Max 4 nav items','red');rdrANL();return;}if(!S.navVis.includes(id))S.navVis.push(id);}else S.navVis=S.navVis.filter(x=>x!==id);rdrNav();rdrANL();save();}
+function togNV(id,show){if(!S.navVis)S.navVis=[];if(show){if(!S.navVis.includes(id))S.navVis.push(id);}else S.navVis=S.navVis.filter(x=>x!==id);rdrNav();rdrANL();save();}
 
 /* ══ SIDEBAR + ORDER ══ */
 function rdrSS(){const list=document.getElementById('ssl-list');if(!list)return;list.innerHTML='';SECS.forEach((s,i)=>{const hid=iHid(s.id);const wrap=document.createElement('div');wrap.className='ssi';const pid=s.type==='custom'?'csec-panel-'+s.id:'admin-'+s.id;wrap.innerHTML=`<div class="ssl${hid?' opa':''}" onclick="showAS2('${pid}',this)" title="${s.label}" style="${hid?'opacity:.38;':''}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">${s.svg}</svg><span style="flex:1;overflow:hidden;text-overflow:ellipsis;">${s.label}</span></div><div class="ssa"><button class="sar" onclick="event.stopPropagation();movSec('${s.id}',-1)">▲</button><button class="sar" onclick="event.stopPropagation();movSec('${s.id}',1)">▼</button></div>${s.type==='custom'?`<button class="sdl" onclick="event.stopPropagation();conf(()=>csecDel('${s.id}'),'Delete?')">✕</button>`:''}`;list.appendChild(wrap);});}
@@ -892,7 +1030,21 @@ function movWork(i,dir){const a=[...S.works];const t=i+dir;if(t<0||t>=a.length)r
 function delWork(id){S.works=S.works.filter(w=>w.id!==id);rdrWorks();rdrWA();save();}
 
 /* ══ CERTS ══ */
-function rdrCerts(){const grid=document.getElementById('cert-grid');if(!grid)return;grid.innerHTML='';S.certs.forEach(c=>{const card=document.createElement('div');card.className='certc';const imgH=c.image?`<img src="${c.image}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div class=certimgw style=height:100%;font-size:2.6rem;>🏆</div>'">`:`<div class="certimgw" style="height:100%;">🏆</div>`;card.innerHTML=`${imgH}<div class="certb"><div class="certn">${c.name}</div><div class="certi">${c.issuer} · ${c.date}</div></div><div class="certo"><div class="con">${c.name}</div><div class="coi">${c.issuer}</div><div class="cod">${c.date}</div><div class="codc">${c.description||''}</div></div>`;grid.appendChild(card);});st('dash-certs',String(S.certs.length));}
+function rdrCerts(){
+  const mq=document.getElementById('cert-marquee');
+  if(!mq)return;
+  mq.innerHTML='';
+  if(!S.certs.length){mq.innerHTML='<p style="color:var(--txt3);padding:1rem;">No certificates yet.</p>';st('dash-certs','0');return;}
+  const makeCard=c=>{
+    const div=document.createElement('div');div.className='certm';
+    const imgH=c.image?`<img src="${c.image}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div class=certimgw style=height:100%;font-size:2.6rem;>🏆</div>'">`:`<div class="certimgw" style="height:100%;">🏆</div>`;
+    div.innerHTML=`${imgH}<div class="certb"><div class="certn">${c.name}</div><div class="certi">${c.issuer} · ${c.date}</div></div><div class="certo"><div style="font-family:'Sora',sans-serif;font-size:.86rem;font-weight:800;color:#fff;margin-bottom:.2rem;">${c.name}</div><div style="font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:.35rem;">${c.issuer}</div><div style="font-size:.56rem;color:var(--txt3);margin-bottom:.4rem;">${c.date}</div><div style="font-size:.64rem;color:var(--txt2);line-height:1.6;">${c.description||''}</div></div>`;
+    return div;
+  };
+  // duplicate for seamless loop
+  [...S.certs,...S.certs].forEach(c=>mq.appendChild(makeCard(c)));
+  st('dash-certs',String(S.certs.length));
+}
 function rdrCertA(){const list=document.getElementById('certl');if(!list)return;list.innerHTML='';S.certs.forEach((c,i)=>{const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:.36rem;margin-bottom:.35rem;padding:.46rem .65rem;background:var(--glass);border:1px solid var(--gb);border-radius:var(--rs);flex-wrap:wrap;';row.innerHTML=`<span>🏆</span><div style="flex:1;min-width:82px;"><div style="font-size:.8rem;font-weight:700;color:var(--txt);">${c.name}</div><div style="font-size:.64rem;color:var(--txt3);">${c.issuer} · ${c.date}</div></div><div style="display:flex;gap:.16rem;"><button class="ab" onclick="movCert(${i},-1)">↑</button><button class="ab" onclick="movCert(${i},1)">↓</button><button class="ab" onclick="openCertMod('${c.id}')">Edit</button><button class="ab danger" onclick="conf(()=>delCert('${c.id}'),'Delete?')">Del</button></div>`;list.appendChild(row);});}
 function movCert(i,dir){const a=[...S.certs];const t=i+dir;if(t<0||t>=a.length)return;[a[i],a[t]]=[a[t],a[i]];S.certs=a;rdrCerts();rdrCertA();save();}
 function delCert(id){S.certs=S.certs.filter(c=>c.id!==id);rdrCerts();rdrCertA();save();}
@@ -900,14 +1052,64 @@ function openCertMod(id){S.editCertId=id||null;const c=id?S.certs.find(x=>x.id==
 function saveCert(){const name=(document.getElementById('ci-n')||{value:''}).value.trim();if(!name){showToast('Name required','red');return;}const cert={name,issuer:(document.getElementById('ci-i')||{value:''}).value.trim(),date:(document.getElementById('ci-d')||{value:''}).value.trim(),image:(document.getElementById('ci-img')||{value:''}).value.trim(),description:(document.getElementById('ci-dc')||{value:''}).value.trim()};if(S.editCertId){const c=S.certs.find(x=>x.id===S.editCertId);if(c)Object.assign(c,cert);}else S.certs.push({id:'c-'+Date.now(),...cert});cm2('m-cert');rdrCerts();rdrCertA();showToast('Saved ✓');playClick('success');save();}
 
 /* ══ STATUS ══ */
-function rdrStats(){const grid=document.getElementById('status-grid');if(!grid)return;grid.innerHTML='';S.stats.forEach(s=>{const card=document.createElement('div');card.className='statc';card.innerHTML=`<div class="staticon">${s.icon}</div><div class="stati"><div class="statlb">${s.label}</div><div class="statv">${s.value}</div>${s.note?`<div class="statn">${s.note}</div>`:''}</div>`;grid.appendChild(card);});st('dash-status',String(S.stats.length));}
+const STAT_COLORS={or:'#F5A300',bl:'#2383E2',rd:'#F04D5C',gr:'#059669',gy:'#6B7280',pu:'#7C3AED'};
+function rdrStats(){
+  const grid=document.getElementById('status-grid');if(!grid)return;grid.innerHTML='';
+  S.stats.forEach(s=>{
+    const col=s.pctColor||(STAT_COLORS[s.color]||'var(--teal)');
+    const hasPct=s.pct>0;
+    const card=document.createElement('div');card.className='statc';
+    let progHTML='';
+    if(hasPct){
+      progHTML=`<div class="stat-prog-wrap"><div class="stat-prog-label"><span class="stat-prog-name">Proficiency</span><span class="stat-prog-val" style="color:${col};">${s.pct}%</span></div><div class="stat-prog-track"><div class="stat-prog-bar" data-pct="${s.pct}" style="background:${col};"></div></div></div>`;
+    }
+    card.innerHTML=`<div class="staticon" style="background:${col}18;border-color:${col}30;">${s.icon}</div><div class="stati"><div class="statlb">${s.label}</div><div class="statv">${s.value}</div>${s.note?`<div class="statn">${s.note}</div>`:''}${progHTML}</div>`;
+    grid.appendChild(card);
+    // Animate bar on intersection
+    if(hasPct){
+      const bar=card.querySelector('.stat-prog-bar');
+      new IntersectionObserver(en=>{if(!en[0].isIntersecting)return;bar.style.width=s.pct+'%';},{threshold:.4}).observe(card);
+    }
+  });
+  st('dash-status',String(S.stats.length));
+}
 function rdrStatA(){const list=document.getElementById('statl');if(!list)return;list.innerHTML='';S.stats.forEach((s,i)=>{const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:.36rem;margin-bottom:.35rem;padding:.46rem .65rem;background:var(--glass);border:1px solid var(--gb);border-radius:var(--rs);flex-wrap:wrap;';row.innerHTML=`<span>${s.icon}</span><div style="flex:1;min-width:82px;"><div style="font-size:.8rem;font-weight:700;color:var(--txt);">${s.label}</div><div style="font-size:.64rem;color:var(--txt3);">${s.value}</div></div><div style="display:flex;gap:.16rem;"><button class="ab" onclick="movStat(${i},-1)">↑</button><button class="ab" onclick="movStat(${i},1)">↓</button><button class="ab" onclick="openStatMod('${s.id}')">Edit</button><button class="ab danger" onclick="conf(()=>delStat('${s.id}'),'Delete?')">Del</button></div>`;list.appendChild(row);});}
 function movStat(i,dir){const a=[...S.stats];const t=i+dir;if(t<0||t>=a.length)return;[a[i],a[t]]=[a[t],a[i]];S.stats=a;rdrStats();rdrStatA();save();}
 function delStat(id){S.stats=S.stats.filter(s=>s.id!==id);rdrStats();rdrStatA();save();}
 function openStatMod(id){S.editStatId=id||null;const s=id?S.stats.find(x=>x.id===id):null;const set=(elId,val)=>{const e=document.getElementById(elId);if(e)e.value=val||'';};set('si-ic',s?.icon||'💼');set('si-lb',s?.label);set('si-vl',s?.value);set('si-nt',s?.note);const t=document.getElementById('sm-t');if(t)t.textContent=s?'Edit Status':'Add Status';om('m-stat');}
 function saveStatItem(){const label=(document.getElementById('si-lb')||{value:''}).value.trim();if(!label){showToast('Label required','red');return;}const item={icon:(document.getElementById('si-ic')||{value:'💼'}).value||'💼',label,value:(document.getElementById('si-vl')||{value:''}).value.trim(),note:(document.getElementById('si-nt')||{value:''}).value.trim()};if(S.editStatId){const s=S.stats.find(x=>x.id===S.editStatId);if(s)Object.assign(s,item);}else S.stats.push({id:'ms-'+Date.now(),...item});cm2('m-stat');rdrStats();rdrStatA();showToast('Saved ✓');playClick('success');save();}
 
-/* ══ CONTACT ══ */
+/* ══ OTHER WEBSITES ══ */
+function rdrOtherWebs(){
+  const grid=document.getElementById('oweb-grid');if(!grid)return;grid.innerHTML='';
+  if(!S.otherwebs||!S.otherwebs.length){grid.innerHTML='<p style="color:var(--txt3);">No sites added yet. Edit in Admin → Settings.</p>';return;}
+  S.otherwebs.forEach(w=>{
+    const a=document.createElement('a');
+    a.className='oweb-card';a.href=w.url||'#';if(w.url&&w.url!=='#')a.target='_blank';a.rel='noopener noreferrer';
+    a.innerHTML=`<div class="oweb-card-icon">${w.icon||'🌐'}</div><div class="oweb-card-title">${w.title}</div><div class="oweb-card-tag">${w.tag||''}</div><div class="oweb-card-desc">${w.desc||''}</div><div class="oweb-card-arrow">↗</div><div class="oweb-card-stripe"></div>`;
+    grid.appendChild(a);
+  });
+}
+
+/* ══ OTHER WEBSITES ADMIN ══ */
+function rdrOWebA(){
+  const list=document.getElementById('owebl');if(!list)return;list.innerHTML='';
+  (S.otherwebs||[]).forEach((w,i)=>{
+    const row=document.createElement('div');
+    row.style.cssText='background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:.75rem;margin-bottom:.55rem;';
+    row.innerHTML=`<div style="display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;margin-bottom:.35rem;">
+      <input class="fi" style="width:44px;" value="${w.icon||'🌐'}" placeholder="Icon" oninput="S.otherwebs[${i}].icon=this.value;rdrOtherWebs();save()">
+      <input class="fi" style="flex:2;min-width:100px;" value="${w.title}" placeholder="Title" oninput="S.otherwebs[${i}].title=this.value;rdrOtherWebs();save()">
+      <input class="fi" style="flex:1;min-width:100px;" value="${w.tag||''}" placeholder="Tag (e.g. Web · Design)" oninput="S.otherwebs[${i}].tag=this.value;rdrOtherWebs();save()">
+      <button class="ab danger" onclick="conf(()=>delOWeb('${w.id}'),'Delete website card?')">✕</button>
+    </div>
+    <input class="fi" style="width:100%;margin-bottom:.3rem;" value="${w.url||'#'}" placeholder="URL https://..." oninput="S.otherwebs[${i}].url=this.value;rdrOtherWebs();save()">
+    <textarea class="fi" rows="2" style="width:100%;" placeholder="Short description..." oninput="S.otherwebs[${i}].desc=this.value;rdrOtherWebs();save()">${w.desc||''}</textarea>`;
+    list.appendChild(row);
+  });
+}
+function addOWeb(){if(!S.otherwebs)S.otherwebs=[];S.otherwebs.push({id:'ow-'+Date.now(),icon:'🌐',title:'New Website',tag:'Web',desc:'',url:'#'});rdrOtherWebs();rdrOWebA();save();}
+function delOWeb(id){S.otherwebs=S.otherwebs.filter(w=>w.id!==id);rdrOtherWebs();rdrOWebA();save();}
 function sendForm(){const name=(document.getElementById('cn')||{value:''}).value.trim();const email=(document.getElementById('ce')||{value:''}).value.trim();const msg=(document.getElementById('cm')||{value:''}).value.trim();const cs=document.getElementById('cs');if(!name){showToast('Enter your name','red');return;}if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('Enter valid email','red');return;}if(!msg){showToast('Enter a message','red');return;}if(!S.contactEmail||S.contactEmail==='your@email.com'){window.open(`mailto:?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`);return;}if(cs){cs.style.display='block';cs.style.color='var(--teal)';cs.textContent='Sending…';}const fd=new FormData();fd.append('name',name);fd.append('email',email);fd.append('message',msg);fd.append('_captcha','false');fetch(`https://formsubmit.co/${S.contactEmail}`,{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(r=>{if(r.ok){if(cs)cs.textContent='✓ Message sent!';showToast('Sent ✓','green');playClick('success');}else window.open(`mailto:${S.contactEmail}`);}).catch(()=>window.open(`mailto:${S.contactEmail}`));}
 
 /* ══ SOCIAL ══ */
@@ -951,7 +1153,7 @@ function addNSave(){const te=document.getElementById('ant');const le=document.ge
 /* ══ ADMIN ══ */
 function openAdm(){if(S.isAdmin){openAdmPanel();return;}const ki=document.getElementById('akin');if(ki)ki.value='';const ke=document.getElementById('akerr');if(ke)ke.style.display='none';om('m-login');setTimeout(()=>document.getElementById('akin')?.focus(),80);}
 function verAdmin(){const ki=document.getElementById('akin');if(!ki)return;if(ki.value===S.adminKey){S.isAdmin=true;cm2('m-login');openAdmPanel();playClick('success');}else{const ke=document.getElementById('akerr');if(ke)ke.style.display='block';ki.value='';playClick('error');}}
-function openAdmPanel(){document.getElementById('admp')?.classList.add('open');document.body.classList.add('is-admin');document.getElementById('heb').style.display='flex';rdrAP();rdrANL();updStats();rdrSocA();rdrSKAdmin();rdrFL();rdrCertA();rdrStatA();rdrWA();popHeroAdmin();const ces=document.getElementById('ces');if(ces)ces.value=S.contactEmail||'';const ft=document.getElementById('aft');if(ft)ft.value=document.getElementById('ftag')?.textContent||'';const fc=document.getElementById('afc');if(fc)fc.value=document.getElementById('fcp')?.textContent||'';rdrSS();rdrSOP();initAN();rdrPO();rdrNav();updDBS();showAS('dashboard');}
+function openAdmPanel(){document.getElementById('admp')?.classList.add('open');document.body.classList.add('is-admin');document.getElementById('heb').style.display='flex';rdrAP();rdrANL();updStats();rdrSocA();rdrSKAdmin();rdrFL();rdrCertA();rdrStatA();rdrWA();rdrOWebA();popHeroAdmin();const ces=document.getElementById('ces');if(ces)ces.value=S.contactEmail||'';const ft=document.getElementById('aft');if(ft)ft.value=document.getElementById('ftag')?.textContent||'';const fc=document.getElementById('afc');if(fc)fc.value=document.getElementById('fcp')?.textContent||'';rdrSS();rdrSOP();initAN();rdrPO();rdrNav();updDBS();popJBAdmin();showAS('dashboard');}
 function logoutAdmin(){S.isAdmin=false;document.getElementById('admp')?.classList.remove('open');document.body.classList.remove('is-admin');document.getElementById('heb').style.display='none';showToast('Logged out');}
 function toggleMSB(){const sb=document.getElementById('adsb');const bd=document.getElementById('adsbb');if(sb){sb.classList.toggle('mob-open');if(bd)bd.classList.toggle('show');}}
 function closeMSB(){const sb=document.getElementById('adsb');const bd=document.getElementById('adsbb');if(sb){sb.classList.remove('mob-open');if(bd)bd.classList.remove('show');}}
@@ -973,12 +1175,16 @@ function showToast(msg,type=''){const t=document.getElementById('toast');if(!t)r
 
 /* ══ INIT ══ */
 async function init(){
-  const loaded=await loadDJ();
+  // Priority: MongoDB → data.json → localStorage
+  let loaded=false;
+  const mongoData=await mongoRead();
+  if(mongoData){loadData(mongoData);loaded=true;}
+  if(!loaded){loaded=await loadDJ();}
   if(!loaded)loadSaved();
   rdrPO();rdrSS();rdrSOP();rdrNav();
   rdrPosts();rdrFSoc();rdrFL();
   rdrSKBars();rdrTools();rdrWorks();
-  rdrCerts();rdrStats();initAN();
+  rdrCerts();rdrStats();rdrOtherWebs();initAN();
   updCard();updIntro();updStats();
   setTimeout(()=>{document.querySelectorAll('.section').forEach(el=>sObs.observe(el));},100);
 }
