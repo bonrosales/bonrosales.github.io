@@ -302,8 +302,30 @@ body::after {
 #hero-photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:opacity .45s ease;}
 .hero-photo-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;font-size:.75rem;font-weight:700;color:var(--txt3);letter-spacing:.12em;text-transform:uppercase;}
 @media(max-width:1100px){.hero-photo-frame{width:400px;height:300px;}}
-@media(max-width:768px){.hero-photo-frame{width:100%;height:0;padding-bottom:75%;}}
-@media(max-width:520px){.hero-photo-frame{width:100%;height:0;padding-bottom:75%;}}
+@media(max-width:768px){
+  .hero-photo-frame{
+    width:100%;
+    height:0;
+    padding-bottom:72%;
+    border-radius:14px;
+  }
+  /* Fix absolute img inside padding-bottom trick */
+  .hero-photo-frame #hero-photo-img,
+  .hero-photo-frame .hero-photo-ph{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+}
+@media(max-width:520px){
+  .hero-photo-frame{
+    width:100%;
+    height:0;
+    padding-bottom:70%;
+    border-radius:12px;
+  }
+}
 .hero-nav{display:flex;align-items:center;gap:.65rem;position:relative;z-index:2;padding-bottom:1.5rem;justify-content:center;}
 .hbb-btn{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);backdrop-filter:blur(10px);color:#fff;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s,transform .2s;flex-shrink:0;}
 .hbb-btn:hover{background:rgba(0,229,204,.18);border-color:var(--teal);transform:scale(1.1);}
@@ -665,8 +687,145 @@ body::after {
 .cbox p{font-size:.88rem;color:var(--txt2);margin-bottom:1.1rem;line-height:1.6;}
 .br{display:flex;gap:.58rem;justify-content:center;}
 @media(max-width:900px){.hdr-stats{display:none;}.contact-grid{grid-template-columns:1fr!important;}.wexp-chart{gap:.5rem;}}
-@media(max-width:768px){.hero-intro{padding:1.4rem 1rem 1.2rem 1.2rem;}.h-role{font-size:.58rem;}.h-name{font-size:clamp(1.2rem,5vw,1.8rem);}.game-grid{grid-template-columns:repeat(auto-fill,minmax(max(90px,(100% - 2*.6rem)/3),1fr));}.sbg{grid-template-columns:1fr;}.tcg{grid-template-columns:repeat(3,1fr);}.contact-grid{grid-template-columns:1fr!important;}.adsb{position:fixed;left:-230px;top:var(--hdr);height:calc(100vh - var(--hdr));z-index:250;box-shadow:4px 0 24px rgba(0,0,0,.5);transition:left .3s;}.adsb.mob-open{left:0;}.ambt{display:flex;}.adl{display:block;}.adm{padding:.8rem;padding-bottom:5rem;}.gc{padding:1.55rem 1.15rem;}.ag2{grid-template-columns:1fr;}}
-@media(max-width:520px){#hero{padding:4rem 1rem .8rem;}.h-name{font-size:clamp(1.05rem,4.5vw,1.5rem);}.section{padding:3rem 1.1rem;}.tcg{grid-template-columns:repeat(3,1fr);gap:1rem;}#site-header{width:calc(100vw - 1.2rem);padding:0 .8rem;}.statg,.oweb-grid{grid-template-columns:1fr 1fr !important;}.game-grid{grid-template-columns:repeat(auto-fit,minmax(max(90px,(100% - .6rem)/2),1fr)) !important;}.wexp-chart{gap:.4rem;height:180px;}.wexp-axis{font-size:.5rem;}}
+@media(max-width:768px){
+  /* ── Hero: collapse to 1 column, no wasted space ── */
+  #hero{padding:1.2rem 1rem 0.5rem;}
+  .hero-content{
+    grid-template-columns:1fr !important;
+    gap:1rem !important;
+    padding:0;
+  }
+  .hero-intro{
+    padding:0;
+    gap:.5rem;
+  }
+  .h-role{font-size:.62rem;letter-spacing:.12em;margin-bottom:.15rem;}
+  .h-name{font-size:clamp(1.6rem,6vw,2.2rem);margin-bottom:.6rem;}
+  .h-addr-grid{gap:.28rem;}
+  .h-addr-row{padding:.32rem .55rem;}
+  .h-addr-lbl{font-size:.46rem;}
+  .h-addr-val{font-size:.72rem;line-height:1.35;}
+
+  /* ── Photo column: full width, no extra gap ── */
+  .hero-photo-col{
+    width:100%;
+    gap:.5rem;
+    align-items:stretch;
+  }
+  .hero-photo-frame{
+    width:100% !important;
+    /* Reset holo border hacks that conflict with padding trick */
+    isolation:isolate;
+  }
+  .hero-nav{
+    padding-bottom:.8rem;
+    gap:.5rem;
+  }
+  .hbb-btn{width:28px;height:28px;font-size:.75rem;}
+  .hbb-dot{width:6px;height:6px;}
+  .hbb-dot.active{width:16px;}
+
+  /* Other mobile fixes */
+  .h-name{font-size:clamp(1.6rem,5.5vw,2rem);}
+  .game-grid{grid-template-columns:repeat(auto-fill,minmax(max(90px,(100% - 2*.6rem)/3),1fr));}
+  .sbg{grid-template-columns:1fr;}
+  .tcg{grid-template-columns:repeat(3,1fr);}
+  .contact-grid{grid-template-columns:1fr!important;}
+  .adsb{position:fixed;left:-230px;top:var(--hdr);height:calc(100vh - var(--hdr));z-index:250;box-shadow:4px 0 24px rgba(0,0,0,.5);transition:left .3s;}
+  .adsb.mob-open{left:0;}
+  .ambt{display:flex;}
+  .adl{display:block;}
+  .adm{padding:.8rem;padding-bottom:5rem;}
+  .gc{padding:1.55rem 1.15rem;}
+  .ag2{grid-template-columns:1fr;}
+}
+@media(max-width:520px){
+  #hero{padding:1rem .85rem .4rem;}
+  .hero-content{gap:.8rem !important;}
+  .h-role{font-size:.58rem;margin-bottom:.1rem;}
+  .h-name{font-size:clamp(1.4rem,5.5vw,1.8rem);margin-bottom:.5rem;}
+  .h-addr-row{padding:.26rem .45rem;}
+  .h-addr-lbl{font-size:.42rem;}
+  .h-addr-val{font-size:.66rem;}
+  .section{padding:3rem 1.1rem;}
+  .tcg{grid-template-columns:repeat(3,1fr);gap:1rem;}
+  #site-header{width:calc(100vw - 1.2rem);padding:0 .8rem;}
+  .statg,.oweb-grid{grid-template-columns:1fr 1fr !important;}
+  .game-grid{grid-template-columns:repeat(auto-fit,minmax(max(90px,(100% - .6rem)/2),1fr)) !important;}
+  .wexp-chart{gap:.4rem;height:180px;}
+  .wexp-axis{font-size:.5rem;}
+}
+
+/* ═══ MOBILE EXTRAS CSS ═══ */
+
+/* Address row tap feedback */
+.h-addr-row{
+  cursor:pointer;
+  transition:background .18s,border-color .18s;
+  display:flex;
+  flex-direction:column;
+  gap:.06rem;
+  position:relative;
+}
+.h-addr-row:active{
+  background:rgba(0,229,204,.1);
+  border-color:rgba(0,229,204,.35);
+}
+
+/* Hero clock */
+#hero-clock{
+  transition:color .3s;
+}
+
+/* Fix holo border on mobile — prevent overflow issues */
+@media(max-width:768px){
+  .hero-photo-frame::before{
+    inset:-2px;
+    border-radius:16px;
+  }
+  .hero-photo-frame::after{
+    inset:2px;
+    border-radius:13px;
+  }
+  /* Ensure absolute-positioned img fills the padding-bottom frame */
+  .hero-photo-frame{
+    position:relative;
+  }
+  .hero-photo-frame > img,
+  .hero-photo-frame > div{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+}
+
+/* Live clock row layout */
+.h-role-row{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  flex-wrap:wrap;
+  margin-bottom:.4rem;
+}
+
+/* Swipe hint on mobile - subtle indicator */
+@media(max-width:768px){
+  .hero-photo-frame::after{
+    content:'';
+    position:absolute;
+    bottom:.55rem;
+    left:50%;
+    transform:translateX(-50%);
+    width:40px;
+    height:3px;
+    background:rgba(255,255,255,.25);
+    border-radius:99px;
+    z-index:10;
+    pointer-events:none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -738,7 +897,7 @@ body::after {
 <div class="mo" id="m-cert"><div class="modal"><div class="mhdr"><span class="mtitle" id="cm-t">Certificate</span><button class="mclose" onclick="cm2('m-cert')">✕</button></div><div class="mbody"><div class="fg"><label class="fl">Name</label><input class="fi" id="ci-n"></div><div class="fg"><label class="fl">Issuer</label><input class="fi" id="ci-i"></div><div class="fg"><label class="fl">Date</label><input class="fi" id="ci-d"></div><div class="fg"><label class="fl">Image URL</label><input class="fi" id="ci-img"></div><div class="fg"><label class="fl">Description</label><textarea class="fi" id="ci-dc" rows="2"></textarea></div></div><div class="mftr"><button class="btn rd sm" onclick="cm2('m-cert')">Cancel</button><button class="btn btl sm" onclick="saveCert()">Save</button></div></div></div>
 <div class="mo" id="m-stat"><div class="modal"><div class="mhdr"><span class="mtitle" id="sm-t">Status</span><button class="mclose" onclick="cm2('m-stat')">✕</button></div><div class="mbody"><div class="fg"><label class="fl">Icon</label><input class="fi" id="si-ic"></div><div class="fg"><label class="fl">Label</label><input class="fi" id="si-lb"></div><div class="fg"><label class="fl">Value</label><input class="fi" id="si-vl"></div><div class="fg"><label class="fl">Note</label><input class="fi" id="si-nt"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;"><div class="fg"><label class="fl">Progress % (0-100)</label><input class="fi" id="si-pc" type="number" min="0" max="100" placeholder="0"></div><div class="fg"><label class="fl">Bar Color</label><input class="fi" id="si-col" type="color" value="#00E5CC" style="height:38px;padding:3px;cursor:pointer;"></div></div></div><div class="mftr"><button class="btn rd sm" onclick="cm2('m-stat')">Cancel</button><button class="btn btl sm" onclick="saveStatItem()">Save</button></div></div></div>
 <div class="mo" id="m-flink"><div class="modal"><div class="mhdr"><span class="mtitle" id="fl-t">Link</span><button class="mclose" onclick="cm2('m-flink')">✕</button></div><div class="mbody"><div class="fg"><label class="fl">Label</label><input class="fi" id="fl-lb"></div><div class="fg"><label class="fl">URL</label><input class="fi" id="fl-url"></div></div><div class="mftr"><button class="btn rd sm" onclick="cm2('m-flink')">Cancel</button><button class="btn btl sm" onclick="saveFL()">Save</button></div></div></div>
-<div class="legal-modal-wrap" id="m-legal-pp" onclick="if(event.target===this)this.classList.remove('open')"><div class="legal-modal"><div class="legal-modal-hdr"><span class="legal-modal-title">🔒 Privacy Policy</span><button class="legal-modal-close" onclick="document.getElementById('m-legal-pp').classList.remove('open')">✕</button></div><div class="legal-modal-body"><div class="legal-modal-badge">📅 Effective: January 2025</div><h3>Information We Collect</h3><p>This portfolio collects minimal information. When you use the contact form, we receive your name, email address, and message content solely to respond to your inquiry.</p><h3>How We Use Your Information</h3><ul><li>To respond to messages sent through the contact form</li><li>To improve the functionality of this portfolio site</li><li>We do not sell, trade, or share your information with third parties</li></ul><h3>Cookies &amp; Local Storage</h3><p>This site uses browser local storage to save your preferences. No tracking cookies or analytics are used.</p><h3>Contact</h3><p>For privacy concerns, contact: <span style="color:var(--teal);font-weight:700;">kramkeas@gmail.com</span></p></div><div class="legal-modal-ftr"><button class="legal-understand" onclick="document.getElementById('m-legal-pp').classList.remove('open')">✓ I Understand</button></div></div></div>
+<div class="legal-modal-wrap" id="m-legal-pp" onclick="if(event.target===this)this.classList.remove('open')"><div class="legal-modal"><div class="legal-modal-hdr"><span class="legal-modal-title">🔒 Privacy Policy</span><button class="legal-modal-close" onclick="document.getElementById('m-legal-pp').classList.remove('open')">✕</button></div><div class="legal-modal-body"><div class="legal-modal-badge">📅 Effective: January 2025</div><h3>Information We Collect</h3><p>This portfolio collects minimal information. When you use the contact form, we receive your name, email address, and message content solely to respond to your inquiry.</p><h3>How We Use Your Information</h3><ul><li>To respond to messages sent through the contact form</li><li>To improve the functionality of this portfolio site</li><li>We do not sell, trade, or share your information with third parties</li></ul><h3>Cookies &amp; Local Storage</h3><p>This site uses browser local storage to save your preferences. No tracking cookies or analytics are used.</p><h3>Contact</h3><p>For privacy concerns, contact: <span style="color:var(--teal);font-weight:700;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1aab3a0acaaa4a0b281a6aca0a8adefa2aeac">[email&#160;protected]</a></span></p></div><div class="legal-modal-ftr"><button class="legal-understand" onclick="document.getElementById('m-legal-pp').classList.remove('open')">✓ I Understand</button></div></div></div>
 <div class="legal-modal-wrap" id="m-legal-tos" onclick="if(event.target===this)this.classList.remove('open')"><div class="legal-modal"><div class="legal-modal-hdr"><span class="legal-modal-title">📋 Terms of Use</span><button class="legal-modal-close" onclick="document.getElementById('m-legal-tos').classList.remove('open')">✕</button></div><div class="legal-modal-body"><div class="legal-modal-badge">📅 Effective: January 2025</div><h3>Acceptance of Terms</h3><p>By accessing this portfolio website (AIV1), you agree to be bound by these Terms of Use.</p><h3>Use of Content</h3><ul><li>All content on this site is the intellectual property of Mark Aivone D. Rosales</li><li>You may not reproduce or distribute content without written permission</li></ul><h3>Prohibited Activities</h3><ul><li>Attempting to access admin areas without authorization</li><li>Using automated tools to scrape or harvest site data</li></ul></div><div class="legal-modal-ftr"><button class="legal-understand" onclick="document.getElementById('m-legal-tos').classList.remove('open')">✓ I Understand</button></div></div></div>
 <div id="admp">
   <div id="adsbb" onclick="closeMSB()"></div>
@@ -782,7 +941,7 @@ body::after {
 <div class="spp" id="spp"><div class="spt">Share Via</div><div class="spo" onclick="shareV('twitter')">𝕏 Twitter</div><div class="spo" onclick="shareV('facebook')">📘 Facebook</div><div class="spo" onclick="shareV('linkedin')">💼 LinkedIn</div><div class="spo" onclick="shareV('copy')">🔗 Copy Link</div></div>
 <div class="toast" id="toast"></div>
 <button id="gt" onclick="goTop()">↑</button>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 /* ══ HELPERS ══ */
 function st(id,v){const e=document.getElementById(id);if(e)e.textContent=v||'';}
@@ -1309,6 +1468,112 @@ init();
   }
 })();
 
+
+/* ═══════════════════════════════════════════════
+   MOBILE EXTRA 1 — Swipe Gestures on Hero Gallery
+   Left/right swipe to navigate photos
+   ═══════════════════════════════════════════════ */
+(()=>{
+  let tx=0,ty=0,dragging=false;
+  const MIN_SWIPE=40,MAX_VERT=60;
+  function onStart(e){
+    const t=e.touches?e.touches[0]:e;
+    tx=t.clientX;ty=t.clientY;dragging=true;
+  }
+  function onEnd(e){
+    if(!dragging)return;
+    dragging=false;
+    const t=e.changedTouches?e.changedTouches[0]:e;
+    const dx=t.clientX-tx,dy=t.clientY-ty;
+    if(Math.abs(dx)<MIN_SWIPE||Math.abs(dy)>MAX_VERT)return;
+    const photos=(S.h.photos||[]).filter(p=>p&&p.trim());
+    if(photos.length<2)return;
+    hgalNav(dx<0?1:-1);
+    e.preventDefault();
+  }
+  function attach(){
+    const frame=document.querySelector('.hero-photo-frame');
+    if(!frame)return;
+    frame.addEventListener('touchstart',onStart,{passive:true});
+    frame.addEventListener('touchend',onEnd,{passive:false});
+    frame.style.touchAction='pan-y';
+  }
+  setTimeout(attach,800);
+})();
+
+/* ═══════════════════════════════════════════════
+   MOBILE EXTRA 2 — Tap Address to Copy
+   Tap any address row → copies text → toast
+   ═══════════════════════════════════════════════ */
+(()=>{
+  function initAddrCopy(){
+    document.querySelectorAll('.h-addr-row').forEach(row=>{
+      if(row.dataset.copyInit)return;
+      row.dataset.copyInit='1';
+      row.style.cursor='pointer';
+      row.title='Tap to copy';
+      // Add copy icon hint
+      const hint=document.createElement('span');
+      hint.style.cssText='font-size:.55rem;color:var(--teal);opacity:.6;margin-left:.3rem;flex-shrink:0;transition:opacity .2s;';
+      hint.textContent='⎘';
+      row.appendChild(hint);
+      row.addEventListener('click',()=>{
+        const val=row.querySelector('.h-addr-val')?.textContent?.trim();
+        if(!val)return;
+        navigator.clipboard.writeText(val).then(()=>{
+          hint.style.opacity='1';
+          hint.textContent='✓';
+          showToast('📋 Copied!','green');
+          setTimeout(()=>{hint.textContent='⎘';hint.style.opacity='.6';},2000);
+        }).catch(()=>{
+          // Fallback for older mobile browsers
+          const ta=document.createElement('textarea');
+          ta.value=val;ta.style.position='fixed';ta.style.opacity='0';
+          document.body.appendChild(ta);ta.select();
+          document.execCommand('copy');document.body.removeChild(ta);
+          showToast('📋 Copied!','green');
+        });
+      });
+    });
+  }
+  setTimeout(initAddrCopy,900);
+  // Re-attach after hero re-render
+  const _orig=window.updIntro;
+  if(typeof updIntro==='function'){
+    window.updIntro=function(){_orig?.();setTimeout(initAddrCopy,200);};
+  }
+})();
+
+/* ═══════════════════════════════════════════════
+   MOBILE EXTRA 3 — Live Clock in Hero
+   Small digital clock next to role text
+   ═══════════════════════════════════════════════ */
+(()=>{
+  function injectClock(){
+    if(document.getElementById('hero-clock'))return;
+    const roleEl=document.getElementById('h-it-el');
+    if(!roleEl||!roleEl.parentElement)return;
+    const wrap=document.createElement('div');
+    wrap.style.cssText='display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-bottom:.4rem;';
+    roleEl.parentElement.insertBefore(wrap,roleEl);
+    wrap.appendChild(roleEl);
+    const clock=document.createElement('span');
+    clock.id='hero-clock';
+    clock.style.cssText='font-size:.6rem;font-weight:800;color:var(--txt3);letter-spacing:.08em;font-family:"Sora",sans-serif;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:.12rem .38rem;border-radius:99px;flex-shrink:0;';
+    wrap.appendChild(clock);
+    function tick(){
+      const now=new Date();
+      const h=now.getHours()%12||12;
+      const m=String(now.getMinutes()).padStart(2,'0');
+      const s=String(now.getSeconds()).padStart(2,'0');
+      const ap=now.getHours()<12?'AM':'PM';
+      clock.textContent=`${h}:${m}:${s} ${ap}`;
+    }
+    tick();
+    setInterval(tick,1000);
+  }
+  setTimeout(injectClock,950);
+})();
 </script>
 </body>
 </html>
